@@ -107,6 +107,7 @@ def GetBestSigma(data):
 		return sigma
 	else:
 		flux_point_source,centro_x,centro_y = GetSourcesForSigma(detections,fo,args.SecureSN,'lala',sigma)
+		print 'Number of Secure sources found:',len(flux_point_source)
 		bmaj,bmin,factor,bpa,pix_size = GetBeam(args.Image)
 		for i in range(len(centro_x)):
 			aux_fits = GetFitsForSigma(centro_x[i],centro_y[i],factor,data,sigma,'lala',bmaj,bmin,bpa,False,pix_size)
