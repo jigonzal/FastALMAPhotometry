@@ -1,6 +1,6 @@
+from __future__ import print_function
 import warnings
 warnings.filterwarnings("ignore")
-from __future__ import print_function
 import matplotlib.pyplot as plt
 import numpy as np
 from astropy.stats import sigma_clip
