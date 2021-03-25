@@ -84,8 +84,8 @@ def GetFitsForSigma(x_c,y_c,factor,fo,sigma,plot_name,bmaj,bmin,bpa,fijo,pix_siz
 		p_init.theta.fixed = True
 	fit_p = fitting.LevMarLSQFitter()
 	with warnings.catch_warnings():
-	    warnings.simplefilter('ignore')
-    	p = fit_p(p_init, x, y, z)
+		warnings.simplefilter('ignore')
+		p = fit_p(p_init, x, y, z)
 	
 	model_flat = p(x, y).flatten()
 	model2 = model_flat[model_flat>=0.135*max(model_flat)]
@@ -178,8 +178,8 @@ def GetFits(x_c,y_c,factor,fo,sigma,plot_name,bmaj,bmin,bpa,fijo,pix_size):
 
 	fit_p = fitting.LevMarLSQFitter()
 	with warnings.catch_warnings():
-	    warnings.simplefilter('ignore')
-    	p = fit_p(p_init, x, y, z)
+		warnings.simplefilter('ignore')
+		p = fit_p(p_init, x, y, z)
 
 	model_flat = p(x, y).flatten()
 	model2 = model_flat[model_flat>=0.135*max(model_flat)]
@@ -300,16 +300,16 @@ def main():
 	#Checking input arguments
 	print(20*'#','Checking inputs....',20*'#')
 	if os.path.exists(args.Image):
-	    print('*** Cube',args.Image,'found ***')
+		print('*** Cube',args.Image,'found ***')
 	else:
-	    print('*** Cube',args.Image,'not found ***\naborting..')
-	    exit()
+		print('*** Cube',args.Image,'not found ***\naborting..')
+		exit()
 
 	if os.path.exists(args.PBImage):
-	    print('*** Cube',args.PBImage,'found ***')
+		print('*** Cube',args.PBImage,'found ***')
 	else:
-	    print('*** Cube',args.PBImage,'not found ***\naborting..')
-	    exit()
+		print('*** Cube',args.PBImage,'not found ***\naborting..')
+		exit()
 
 	output = open('TableFastPhot.dat','w')
 	if os.path.isdir('plots/'):
