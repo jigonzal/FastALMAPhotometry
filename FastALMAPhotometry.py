@@ -1,5 +1,6 @@
 import warnings
 warnings.filterwarnings("ignore")
+from __future__ import print_function
 import matplotlib.pyplot as plt
 import numpy as np
 from astropy.stats import sigma_clip
@@ -107,7 +108,7 @@ def GetBestSigma(data):
 		return sigma
 	else:
 		flux_point_source,centro_x,centro_y = GetSourcesForSigma(detections,fo,args.SecureSN,'lala',sigma)
-		print 'Number of Secure sources found:',len(flux_point_source)
+		print('Number of Secure sources found:',len(flux_point_source))
 		bmaj,bmin,factor,bpa,pix_size = GetBeam(args.Image)
 		for i in range(len(centro_x)):
 			aux_fits = GetFitsForSigma(centro_x[i],centro_y[i],factor,data,sigma,'lala',bmaj,bmin,bpa,False,pix_size)
@@ -249,7 +250,7 @@ def RunSearch(output):
 	w = WCS(args.Image)
 	data_aux = 1.0*data
 	sigma = GetBestSigma(data)
-	print 'RMS:',round(sigma*1e6,1),' microJy/beam'
+	print('RMS:',round(sigma*1e6,1),' microJy/beam')
 	data = 1.0*data_aux
 	data_aux = 0
 	sigma,sn_lim,detections,fo = GetDetections(data,sigma)
@@ -258,12 +259,12 @@ def RunSearch(output):
 	fo = np.nan_to_num(fo)
 
 	if len(detections[0])==0:
-		print 'no detections',detections
+		print('no detections',detections)
 		return output
 	flux_point_source,centro_x,centro_y = GetSources(detections,fo,args.MinSN,'Candidate',sigma)	
 	flux_response = pb
 	for i in range(len(centro_x)):
-		print 'Measuring properties for candidate:',i+1,'/',len(centro_x)
+		print('Measuring properties for candidate:',i+1,'/',len(centro_x))
 		model_name = 'Candidate_ID'+str(i+1)+'.pdf'
 		aux = 'ID' + str(i+1).zfill(2) +'\t'
 		dec = w.all_pix2world(centro_x[i], centro_y[i],0,0, 0)[w.wcs.lat]
@@ -297,17 +298,17 @@ def main():
 
 	args = parser.parse_args()
 	#Checking input arguments
-	print 20*'#','Checking inputs....',20*'#'
+	print(20*'#','Checking inputs....',20*'#')
 	if os.path.exists(args.Image):
-	    print '*** Cube',args.Image,'found ***'
+	    print('*** Cube',args.Image,'found ***')
 	else:
-	    print '*** Cube',args.Image,'not found ***\naborting..'
+	    print('*** Cube',args.Image,'not found ***\naborting..')
 	    exit()
 
 	if os.path.exists(args.PBImage):
-	    print '*** Cube',args.PBImage,'found ***'
+	    print('*** Cube',args.PBImage,'found ***')
 	else:
-	    print '*** Cube',args.PBImage,'not found ***\naborting..'
+	    print('*** Cube',args.PBImage,'not found ***\naborting..')
 	    exit()
 
 	output = open('TableFastPhot.dat','w')
